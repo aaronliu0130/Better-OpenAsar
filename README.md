@@ -18,7 +18,7 @@ GreenMan36's improved version automatically detects the folder for the newest ve
 2. Pick the Discord version
 3. Confirm the info
 4. Install
-5. Done!
+5. Open Discord and done!
 
 * Installs no matter Discord's version
 * Intuitive error messages
