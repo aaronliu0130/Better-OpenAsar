@@ -12,7 +12,7 @@ GreenMan36's improved version automatically detects the folder for the newest ve
 
 [![asciicast](https://asciinema.org/a/Hr6o4z5O2AMEZKnTTPQenpOot.svg)](https://asciinema.org/a/Hr6o4z5O2AMEZKnTTPQenpOot)
 
-#### TL;DW:
+#### TL;DR:
 
 1. Show a little animation
 2. Pick the Discord version
@@ -29,7 +29,17 @@ If there's any issues, the installer will give you a nice error message which an
 
 On Linux, no updates have changed the path of Discord's files yet. However, there are a ton of paths that could have them, as Discord does not have official packages for every distro (variety) of Linux, and even the official packages might get installed to different places by package managers.
 
-### Bash
+### Demo
+
+[![asciicast](https://asciinema.org/a/ucSR2ZZcSpIvl6AKPJY5TISBU.svg)](https://asciinema.org/a/ucSR2ZZcSpIvl6AKPJY5TISBU)
+
+#### TL;DR:
+
+1. Show a little animation
+2. Pick the Discord channel
+3. Confirm the info
+4. Insstall
+5. Done!
 
 * Bash is the most widely installed shell that allows for Bash scripting
 * Try every known location of Discord's files
