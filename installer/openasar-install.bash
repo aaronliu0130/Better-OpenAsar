@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# v1.0: Arong Aarony
+# v1.0.1: Arong Aarony
 cd "$(dirname "$0")"
 if [[ -z $spaceballs ]]; then
     # lil animation, can be skipped by exporting spaceballs
@@ -25,7 +25,7 @@ if [[ -z $spaceballs ]]; then
     echo '====  =    ==== =   =  =  =  = ==== =  = =  ='
     echo
     sleep 1
-    if [[ $(curl -sL 'https://github.com/aaronliu0130/Better-OpenAsar/raw/main/installer/openasar-install.bash' | sed '2!d') != "# v1.0: Arong Aarony" ]]; then
+    if [[ $(curl -sL 'https://github.com/aaronliu0130/Better-OpenAsar/raw/main/installer/openasar-install.bash' | sed '2!d') != "# v1.0.1: Arong Aarony" ]]; then
         curl -sLo "./openasar-install.bash" 'https://github.com/aaronliu0130/Better-OpenAsar/raw/main/installer/openasar-install.bash'
         if ! ./openasar-install.bash; then
             exit $?
@@ -184,8 +184,8 @@ if ! mv "$file" "$file.backup"; then
     if [[ -e "$(dirname "$file")/_app.asar" ]]; then
         sudo mv "$(dirname "$file")/_app.asar" "$(dirname "$file")/_app.asar.backup"
     fi
-    if [[ -e "$(file).orig" ]]; then
-        sudo mv "$(file).orig" "$(file).orig.backup"
+    if [[ -e "$file.orig" ]]; then
+        sudo mv "$file.orig" "$(file).orig.backup"
     fi
 else
     # I don't think the following code is necessary, I think we shouldn't tamper with stuff we don't change, but the original installer does this
