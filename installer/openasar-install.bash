@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 # v1.0: Arong Aarony
+cd "$(dirname "$0")"
 if [[ -z $spaceballs ]]; then
     # lil animation, can be skipped by exporting spaceballs
     clear
