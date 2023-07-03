@@ -10,7 +10,7 @@ GreenMan36's improved version automatically detects the folder for the newest ve
 
 ### Demo
 
-
+[![asciicast](https://asciinema.org/a/Hr6o4z5O2AMEZKnTTPQenpOot.svg)](https://asciinema.org/a/Hr6o4z5O2AMEZKnTTPQenpOot)
 
 #### TL;DW:
 
