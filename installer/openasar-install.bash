@@ -25,8 +25,8 @@ if [[ -z $spaceballs ]]; then
     echo '====  =    ==== =   =  =  =  = ==== =  = =  ='
     echo
     sleep 1
-    if [[ $(curl -sL 'https://github.com/aaronliu0130/Better-OpenAsar/raw/main/installer/openasar-installer.bash' | sed '2!d') != "# v1.0: Arong Aarony" ]]; then
-        curl -sLo "./openasar-install.bash" 'https://github.com/aaronliu0130/Better-OpenAsar/raw/main/installer/openasar-installer.bash'
+    if [[ $(curl -sL 'https://github.com/aaronliu0130/Better-OpenAsar/raw/main/installer/openasar-install.bash' | sed '2!d') != "# v1.0: Arong Aarony" ]]; then
+        curl -sLo "./openasar-install.bash" 'https://github.com/aaronliu0130/Better-OpenAsar/raw/main/installer/openasar-install.bash'
         if ! ./openasar-install.bash; then
             exit $?
         else
@@ -84,6 +84,7 @@ while [[ -z $kebab ]]; do
     esac
 done
 
+ans=$((ans-1))
 camel=('discord' 'discordPtb' 'discordCanary')
 pascal=('Discord' 'DiscordPtb' 'DiscordCanary')
 plain=('Discord Stable' 'Discord PTB' 'Discord Canary')
@@ -103,7 +104,7 @@ for file in "${files[@]}"; do
     fi
 done
 if [[ "$file" == "WtoI-7DWs4o" ]]; then
-    if [[ $ans == 2 && -e '/usr/lib/discord-development/app.asar' ]]; then
+    if [[ $ans == 1 && -e '/usr/lib/discord-development/app.asar' ]]; then
         file=/usr/lib/discord-development/app.asar
     else
         echo "Couldn't find ${plain[ans]}'s app.asar, please specify the path to the app.asar file or input 0 to restart."
