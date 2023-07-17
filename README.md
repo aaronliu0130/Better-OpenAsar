@@ -8,11 +8,11 @@ On Linux, no updates have changed the path of Discord's files yet. However, ther
 
 ### 🎥 Demo
 
-[![asciicast](https://asciinema.org/a/ucSR2ZZcSpIvl6AKPJY5TISBU.svg)](https://asciinema.org/a/ucSR2ZZcSpIvl6AKPJY5TISBU)
+[![asciicast](https://asciinema.org/a/ucSR2ZZcSpIvl6AKPJY5TISBU.svg)](https://asciinema.org/a/594424?autoplay=1)
 
 #### 😩 TL;DR:
 
-1. Show a little animation
+1. Show a better animation
 2. Pick the Discord channel
 3. Confirm the info
 4. Insstall
@@ -20,7 +20,7 @@ On Linux, no updates have changed the path of Discord's files yet. However, ther
 
 * Bash is the most widely installed shell that allows for Bash scripting
 * Try every known location of Discord's files
-* Even better animation
+* Even nicer animation
 * Always only download OpenAsar once
 * Automatically try to sudo if installation fails
 * Intuitive input hints
@@ -34,7 +34,7 @@ GreenMan36's improved version automatically detects the folder for the newest ve
 
 ### 🎥 Demo
 
-[![asciicast](https://asciinema.org/a/Hr6o4z5O2AMEZKnTTPQenpOot.svg)](https://asciinema.org/a/Hr6o4z5O2AMEZKnTTPQenpOot)
+[![asciicast](https://asciinema.org/a/Hr6o4z5O2AMEZKnTTPQenpOot.svg)](https://asciinema.org/a/594421?autoplay=1)
 
 #### 😩 TL;DR:
 
@@ -51,6 +51,6 @@ If there's any issues, the installer will give you a nice error message which an
 
 ## 🤓 Misc
 
-- Ducko doesn't want to use the Windows script
-- Please also check out  <https://github.com/stefanhaustein/TerminalImageViewer> and <https://github.com/upscayl/upscayl>
+- Ducko doesn't want to use these scripts for some reason
+- Please also check out <https://github.com/stefanhaustein/TerminalImageViewer> and <https://github.com/upscayl/upscayl>
 - Check out GreenMan36's OpenAsar supported Discord themes at  [![Discord](https://img.shields.io/discord/1050062854860046417?color=7289da&logo=discord&logoColor=white)](https://discord.gg/A6vwGchJYs)
