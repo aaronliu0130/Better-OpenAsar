@@ -6,7 +6,7 @@ setlocal enabledelayedexpansion
 rem lil animation, can be skipped by pressing any key 3 times
 cls
 echo.
-echo Installer updated and maintained by GreenMan36#0633
+echo Installer updated by @aaronliu and maintained by @greenman36
 echo.
 echo ####  ###  #### #   #      ##  ####  ##  ###  
 echo #  #  #  # #    ##  #     #  # #    #  # #  # 
@@ -17,7 +17,7 @@ echo.
 C:\Windows\System32\TIMEOUT.exe /t 1 > nul 2> nul
 cls
 echo.
-echo Installer updated and maintained by GreenMan36#0633
+echo Installer updated by @aaronliu and maintained by @greenman36
 echo.
 echo ====  ===  ==== =   =      ==  ====  ==  ===  
 echo =  =  =  = =    ==  =     =  = =    =  = =  = 
@@ -28,7 +28,7 @@ echo.
 C:\Windows\System32\TIMEOUT.exe /t 1 > nul 2> nul
 cls
 echo.
-echo Installer updated and maintained by GreenMan36#0633
+echo Installer updated by @aaronliu and maintained by @greenman36
 echo.
 echo ....  ...  .... .   .      ..  ....  ..  ...  
 echo .  .  .  . .    ..  .     .  . .    .  . .  . 
@@ -41,7 +41,7 @@ cls
 
 rem Discord flavor selection menu
 echo.
-echo Installer updated and maintained by GreenMan36#0633
+echo Installer updated and maintained by @greenman36
 echo.
 echo Select Discord version:
 echo 1. Discord Stable (Default Client)
@@ -104,7 +104,7 @@ cls
 
 rem Let the user make sure all info is correct before continuing
 echo.
-echo Installer updated and maintained by GreenMan36#0633
+echo Installer updated and maintained by @greenman36
 echo.
 echo Confirm the following information before continuing.
 echo.
@@ -140,13 +140,13 @@ if errorlevel 1 (
 rem Download OpenAsar, change the color so the download bar blends in
 color 36
 echo 2. Downloading OpenAsar
-powershell -Command "Invoke-WebRequest https://github.com/GooseMod/OpenAsar/releases/download/nightly/app.asar -OutFile \"$Env:LOCALAPPDATA\%discordApp%\app-%version%\resources\app.asar\"" > nul 2> nul
+powershell -Command "Invoke-WebRequest https://github.com/GooseMod/OpenAsar/releases/download/nightly/app.asar -OutFile "%localappdata%\%discordApp%\app-%version%\resources\app.asar"" > nul 2> nul
 
 if exist "%localappdata%\%discordApp%\app-%version%\resources\_app.asar" (
-    powershell -Command "Invoke-WebRequest https://github.com/GooseMod/OpenAsar/releases/download/nightly/app.asar -OutFile \"%localappdata%\%discordApp%\app-%version%\resources\_app.asar\"" > nul 2> nul
+    copy "%localappdata%\%discordApp%\app-%version%\resources\app.asar" "%localappdata%\%discordApp%\app-%version%\resources\_app.asar"
 )
 if exist "%localappdata%\%discordApp%\app-%version%\resources\app.asar.orig" (
-    powershell -Command "Invoke-WebRequest https://github.com/GooseMod/OpenAsar/releases/download/nightly/app.asar -OutFile \"%localappdata%\%discordApp%\app-%version%\resources\app.asar.orig\"" > nul 2> nul
+    copy "%localappdata%\%discordApp%\app-%version%\resources\app.asar" "%localappdata%\%discordApp%\app-%version%\resources\app.asar.orig"
 )
 
 rem If the download command failed, exit
@@ -172,9 +172,9 @@ C:\Windows\System32\TIMEOUT.exe /t 1 /nobreak > nul 2> nul
 echo.
 echo.
 echo OpenAsar should be installed! You can check by looking for an "OpenAsar" option in your Discord settings.
-echo Not installed? Try restarting Discord, running the script again, joining the OpenAsar Discord or contacting GreenMan36#0633 on Discord.
+echo Not installed? Try restarting Discord, running the script again, joining the OpenAsar Discord or contacting @greenman36 on Discord.
 echo.
-echo Installer updated and maintained by GreenMan36#0633
+echo Installer updated and maintained by @greenman36
 echo Also check out some of my other projects at [GreenMan36.github.io](https://GreenMan36.github.io)
 echo.
 
