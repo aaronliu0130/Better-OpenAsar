@@ -61,7 +61,7 @@ if "%selection%"=="1" (
     echo No input detected. Defaulting to Discord Stable.
     set "discordApp=Discord"
 ) else (
-	color 04
+	color F4
     echo Invalid selection. Please try again.
     color
     pause
@@ -83,7 +83,7 @@ for /f "delims=" %%d in ('dir /b /ad /on "%localappdata%\%discordApp%\app-*"') d
 
 rem If no version folders are found, exit. We can't continue
 if not defined latestVersion (
-    color 04
+    color F4
     echo No version folders found.
     color
     pause
@@ -128,7 +128,7 @@ if exist "%localappdata%\%discordApp%\app-%version%\resources\app.asar.orig" (
 
 rem If the copy command failed, exit
 if errorlevel 1 (
-    color 04
+    color F4
     echo Error: Failed to copy the file.
     echo Please check the file paths and try again.
     echo.
@@ -137,8 +137,6 @@ if errorlevel 1 (
     exit
 )
 
-rem Download OpenAsar, change the color so the download bar blends in
-color 36
 echo 2. Downloading OpenAsar
 powershell -Command "Invoke-WebRequest https://github.com/GooseMod/OpenAsar/releases/download/nightly/app.asar -OutFile "%localappdata%\%discordApp%\app-%version%\resources\app.asar"" > nul 2> nul
 
@@ -151,7 +149,7 @@ if exist "%localappdata%\%discordApp%\app-%version%\resources\app.asar.orig" (
 
 rem If the download command failed, exit
 if errorlevel 1 (
-    color 04
+    color F4
     echo Error: Failed to download and replace the asar file.
     echo Please check your internet connection. Also make sure that the Discord client is closed.
     echo.
@@ -162,7 +160,7 @@ if errorlevel 1 (
 
 rem Change the color to indicate success and start Discord
 cls
-color 02
+color F2
 echo.
 echo Opening Discord...
 start "" "%localappdata%\%discordApp%\Update.exe" --processStart %discordApp%.exe > nul 2> nul
