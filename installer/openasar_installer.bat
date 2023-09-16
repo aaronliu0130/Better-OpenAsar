@@ -130,8 +130,12 @@ if exist "%localappdata%\%discordApp%\app-%version%\resources\app.asar.orig" (
 )
 rem If the copy command failed, exit
 if errorlevel 1 (
-    set "error=Failed to backup the existing ASARs."
-    goto error
+    color f6
+    echo.
+    echo Warning: Failed to backup the existing ASARs.
+    echo.
+    pause
+    color 07
 )
 
 echo 2. Downloading OpenAsar (ignore any flashes, this is a download progress bar)
