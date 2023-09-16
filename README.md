@@ -8,7 +8,7 @@ On Linux, no updates have changed the path of Discord's files yet. However, ther
 
 ### 🎥 Demo
 
-[![asciicast](https://asciinema.org/a/ucSR2ZZcSpIvl6AKPJY5TISBU.svg)](https://asciinema.org/a/594424?autoplay=1)
+[![asciicast](https://asciinema.org/a/ucSR2ZZcSpIvl6AKPJY5TISBU.svg)](https://asciinema.org/a/608376?autoplay=1)
 
 #### 😩 TL;DR:
 
