@@ -120,15 +120,15 @@ if exist "%localappdata%\%discordApp%\app-%latestVersion%\resources\app.asar.bac
     pause
     color 07
 )
-rem This is done multiple times because there's multiple client mods that use different file names and we support those
-move /y "%localappdata%\%discordApp%\app-%latestVersion%\resources\app.asar" "%localappdata%\%discordApp%\app-%latestVersion%\resources\app.asar.backup" >nul
+rem Popular client mods use these files as the asar to read discord from
 if exist "%localappdata%\%discordApp%\app-%latestVersion%\resources\_app.asar" (
     move /y "%localappdata%\%discordApp%\app-%latestVersion%\resources\_app.asar" "%localappdata%\%discordApp%\app-%latestVersion%\resources\_app.asar.backup" >nul
-)
-if exist "%localappdata%\%discordApp%\app-%version%\resources\app.asar.orig" (
-    move /y "%localappdata%\%discordApp%\app-%latestVersion%\resources\app.asar.orig" "%localappdata%\%discordApp%\app-%latestVersion%\resources\app.asar.orig.backup" >nul
-)
-rem If the copy command failed, exit
+) else ( if exist "%localappdata%\%discordApp%\app-%version%\resources\app.orig.asar" (
+    move /y "%localappdata%\%discordApp%\app-%latestVersion%\resources\app.orig.asar" "%localappdata%\%discordApp%\app-%latestVersion%\resources\app.orig.asar.backup" >nul
+) else (
+    rem No mod known
+    move /y "%localappdata%\%discordApp%\app-%latestVersion%\resources\app.asar" "%localappdata%\%discordApp%\app-%latestVersion%\resources\app.asar.backup" >nul
+))
 if errorlevel 1 (
     color f6
     echo.
@@ -139,14 +139,14 @@ if errorlevel 1 (
 )
 
 echo 2. Downloading OpenAsar (ignore any flashes, this is a download progress bar)
-powershell -Command "Invoke-WebRequest https://github.com/GooseMod/OpenAsar/releases/download/nightly/app.asar -OutFile "%localappdata%\%discordApp%\app-%version%\resources\app.asar"" >nul
-
 if exist "%localappdata%\%discordApp%\app-%version%\resources\_app.asar.backup" (
-    copy "%localappdata%\%discordApp%\app-%version%\resources\app.asar" "%localappdata%\%discordApp%\app-%version%\resources\_app.asar"
-)
-if exist "%localappdata%\%discordApp%\app-%version%\resources\app.asar.orig.backup" (
-    copy "%localappdata%\%discordApp%\app-%version%\resources\app.asar" "%localappdata%\%discordApp%\app-%version%\resources\app.asar.orig"
-)
+    powershell -Command "Invoke-WebRequest https://github.com/GooseMod/OpenAsar/releases/download/nightly/app.asar -OutFile "%localappdata%\%discordApp%\app-%version%\resources\_app.asar"" >nul
+) else ( if exist "%localappdata%\%discordApp%\app-%version%\resources\app.orig.asar.backup" (
+    powershell -Command "Invoke-WebRequest https://github.com/GooseMod/OpenAsar/releases/download/nightly/app.asar -OutFile "%localappdata%\%discordApp%\app-%version%\resources\app.orig.asar"" >nul
+) else (
+    rem No mod known
+    powershell -Command "Invoke-WebRequest https://github.com/GooseMod/OpenAsar/releases/download/nightly/app.asar -OutFile "%localappdata%\%discordApp%\app-%version%\resources\app.asar"" >nul
+))
 
 rem If the download command failed, exit
 if errorlevel 1 (

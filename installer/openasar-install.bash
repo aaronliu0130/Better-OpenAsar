@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# v1.0.1: Arong Aarony
+# v1.1.0: Benign Bepluggings
 cd "$(dirname "$0")"
 if [[ -z $spaceballs ]]; then
     # lil animation, can be skipped by exporting spaceballs
@@ -25,7 +25,7 @@ if [[ -z $spaceballs ]]; then
     echo '====  =    ==== =   =  =  =  = ==== =  = =  ='
     echo
     sleep 1
-    if [[ $(curl -sL 'https://github.com/aaronliu0130/Better-OpenAsar/raw/main/installer/openasar-install.bash' | sed '2!d') != "# v1.0.1: Arong Aarony" ]]; then
+    if [[ $(curl -sL 'https://github.com/aaronliu0130/Better-OpenAsar/raw/main/installer/openasar-install.bash' | sed '2!d') != "# v1.1.0: Benign Bepluggings" ]]; then
         curl -sLo "./openasar-install.bash" 'https://github.com/aaronliu0130/Better-OpenAsar/raw/main/installer/openasar-install.bash'
         if ! ./openasar-install.bash; then
             exit $?
@@ -173,7 +173,6 @@ done
 echo Installing...
 echo
 echo '1. Backing up original app.asar(s) to app.asar(s).backup...'
-mv "$file" "$file.backup"
 if ! mv "$file" "$file.backup"; then
     echo Modification failed, please provide the sudo password to elevate and retry.
     if ! sudo mv "$file" "$file.backup"; then
@@ -184,13 +183,17 @@ if ! mv "$file" "$file.backup"; then
     if [[ -e "$(dirname "$file")/_app.asar" ]]; then
         sudo mv "$(dirname "$file")/_app.asar" "$(dirname "$file")/_app.asar.backup"
     fi
-    if [[ -e "$file.orig" ]]; then
-        sudo mv "$file.orig" "$(file).orig.backup"
+    if [[ -e "$(dirname "$file")/app.orig.asar" ]]; then
+        sudo mv "$(dirname "$file")/app.orig.asar" "$(file).orig.backup"
     fi
 else
-    # I don't think the following code is necessary, I think we shouldn't tamper with stuff we don't change, but the original installer does this
-    if [[ -e "$(dirname "$file")/_app.asar" ]]; then mv "$(dirname "$file")/_app.asar" "$(dirname "$file")/_app.asar.backup"; fi
-    if [[ -e "$file.orig" ]]; then mv "$file.orig" "$file.orig.backup"; fi
+    # Popular client mods refer to these files as the original asar
+    if [[ -e "$(dirname "$file")/_app.asar" ]]; then
+        mv "$(dirname "$file")/_app.asar" "$(dirname "$file")/_app.asar.backup"
+    fi
+    if [[ -e "$(dirname "$file")/app.orig.asar" ]]; then
+        mv "$(dirname "$file")/app.orig.asar" "$(dirname "$file")/app.orig.asar.backup"
+    fi
 fi
 
 echo '2. Downloading OpenAsar...'
@@ -200,11 +203,31 @@ if ! curl -sLo "$file" 'https://github.com/GooseMod/OpenAsar/releases/download/l
         echo Failed even with elevation. Please file an issue and report this. Exiting...
         exit 77
     fi
-    if [[ -e $(dirname "$file")/_app.asar.backup ]]; then sudo cp "$file" "$(dirname "$file")/_app.asar"; fi
-    if [[ -e "$file.orig.backup" ]]; then sudo cp "$file" "$file.orig.backup"; fi
+    if [[ -e "$(dirname "$file")/_app.asar.backup" && "$(basename "$file")" != _app.asar ]]; then
+        sudo cp "$file" "$(dirname "$file")/_app.asar"
+        sudo mv -f "$file.backup" "$file"
+    fi
+    if [[ -e "$(dirname "$file")/app.orig.asar.backup" && "$(basename "$file")" != app.orig.asar ]]; then
+        if ! sudo cp "$file" "$(dirname "$file")/app.orig.asar" 2>/dev/null; then
+            # weird user has both replugged and BD installed smh so we hid errors
+            sudo cp "$(dirname "$file")/_app.asar" "$(dirname "$file")/app.orig.asar"
+        else
+            sudo mv -f "$file.backup" "$file"
+        fi
+    fi
 else
-    if [[ -e $(dirname "$file")/_app.asar.backup ]]; then cp "$file" "$(dirname "$file")/_app.asar"; fi
-    if [[ -e "$file.orig.backup" ]]; then cp "$file" "$file.orig.backup"; fi
+    if [[ -e "$(dirname "$file")/_app.asar.backup" && "$(basename "$file")" != _app.asar ]]; then
+        cp "$file" "$(dirname "$file")/_app.asar"
+        mv -f "$file.backup" "$file"
+    fi
+    if [[ -e "$(dirname "$file")/app.orig.asar.backup" && "$(basename "$file")" != app.orig.asar ]]; then
+        if ! cp "$file" "$(dirname "$file")/app.orig.asar" 2>/dev/null; then
+            # weird user has both replugged and BD installed smh so we hid errors
+            cp "$(dirname "$file")/_app.asar" "$(dirname "$file")/app.orig.asar"
+        else
+            mv -f "$file.backup" "$file"
+        fi
+    fi
 fi
 echo All clear!
 sleep 1
