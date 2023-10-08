@@ -1,63 +1,71 @@
 #!/usr/bin/env bash
-# v1.1.0: Benign Bepluggings
+# v1.1.1: Benign Bepluggings
 cd "$(dirname "$0")"
+
+# Header strings
+dot () {
+    if [[ -z "$1" ]]; then sleep 1; fi
+    clear
+    echo '
+Installer updated and maintained by aaronliu0130 (@aaronliu)
+
+....  ...  .... .   .      ..  ....  ..  ...
+.  .  .  . .    ..  .     .  . .    .  . .  .
+.  .  ...  .... . . .     .... .... .... ...
+.  .  .    .    .  ..     .  .    . .  . .  .
+....  .    .... .   .  .  .  . .... .  . .  .
+'
+}
+eq () {
+    if [[ -z "$1" ]]; then sleep 1; fi
+    clear
+    echo '
+Installer updated and maintained by aaronliu0130 (@aaronliu)
+
+====  ===  ==== =   =      ==  ====  ==  ===
+=  =  =  = =    ==  =     =  = =    =  = =  =
+=  =  ===  ==== = = =     ==== ==== ==== ===
+=  =  =    =    =  ==     =  =    = =  = =  =
+====  =    ==== =   =  =  =  = ==== =  = =  =
+'
+}
+hash () {
+    if [[ -z "$1" ]]; then sleep 1; fi
+    clear
+    echo '
+Installer updated and maintained by aaronliu0130 (@aaronliu)
+
+####  ###  #### #   #      ##  ####  ##  ###
+#  #  #  # #    ##  #     #  # #    #  # #  #
+#  #  ###  #### # # #     #### #### #### ###
+#  #  #    #    #  ##     #  #    # #  # #  #
+####  #    #    #   #  #  #  # #### #  # #  #
+'
+}
+end='OpenAsar should be installed! You can check by looking for an "OpenAsar" option in your Discord settings.
+Not installed? Try restarting Discord, running this script again, filing a GitHub issue or contacting @aaronliu on Discord.'
+
 if [[ -z $spaceballs ]]; then
-    # lil animation, can be skipped by exporting spaceballs
-    clear
-    echo
-    echo 'Installer updated and maintained by aaronliu0130 (@aaronliu)'
-    echo
-    echo '....  ...  .... .   .      ..  ....  ..  ...'
-    echo '.  .  .  . .    ..  .     .  . .    .  . .  .'
-    echo '.  .  ...  .... . . .     .... .... .... ...'
-    echo '.  .  .    .    .  ..     .  .    . .  . .  .'
-    echo '....  .    .... .   .  .  .  . .... .  . .  .'
-    echo
-    sleep 1
-    clear
-    echo
-    echo 'Installer updated and maintained by aaronliu0130 (@aaronliu)'
-    echo
-    echo '====  ===  ==== =   =      ==  ====  ==  ==='
-    echo '=  =  =  = =    ==  =     =  = =    =  = =  ='
-    echo '=  =  ===  ==== = = =     ==== ==== ==== ==='
-    echo '=  =  =    =    =  ==     =  =    = =  = =  ='
-    echo '====  =    ==== =   =  =  =  = ==== =  = =  ='
-    echo
-    sleep 1
-    if [[ $(curl -sL 'https://github.com/aaronliu0130/Better-OpenAsar/raw/main/installer/openasar-install.bash' | sed '2!d') != "# v1.1.0: Benign Bepluggings" ]]; then
-        curl -sLo "./openasar-install.bash" 'https://github.com/aaronliu0130/Better-OpenAsar/raw/main/installer/openasar-install.bash'
+    # li'l nicer animation, can be skipped by exporting spaceballs
+    dot n
+    eq
+    # Update checker
+    if [[ $(curl -r 0-99 -sL 'https://github.com/aaronliu0130/Better-OpenAsar/raw/main/installer/openasar-install.bash' | sed '2!d') != "# v1.1.1: Benign Bepluggings" ]]; then
+        echo 'Updating...'
+        curl -Lo "./openasar-install.bash" 'https://github.com/aaronliu0130/Better-OpenAsar/raw/main/installer/openasar-install.bash'
         if ! ./openasar-install.bash; then
             exit $?
         else
             if [ $? -ne 0 ]; then exit $?; fi
             export spaceballs="If you can read this, you don't need glasses."
-            clear
-            echo
-            echo 'Installer updated and maintained by aaronliu0130 (@aaronliu)'
-            echo
-            echo '====  ===  ==== =   =      ==  ====  ==  ==='
-            echo '=  =  =  = =    ==  =     =  = =    =  = =  ='
-            echo '=  =  ===  ==== = = =     ==== ==== ==== ==='
-            echo '=  =  =    =    =  ==     =  =    = =  = =  ='
-            echo '====  =    ==== =   =  =  =  = ==== =  = =  ='
-            echo
-            echo 'OpenAsar should be installed! You can check by looking for an "OpenAsar" option in your Discord settings.'
-            echo 'Not installed? Try restarting Discord, running this script again, filing a GitHub issue or contacting @aaronliu on Discord.'
+            eq
+            echo "$end"
             exit 0
         fi
     fi
+    sleep 1
 fi
-clear
-echo
-echo 'Installer updated and maintained by aaronliu0130 (@aaronliu)'
-echo
-echo '####  ###  #### #   #      ##  ####  ##  ###'
-echo '#  #  #  # #    ##  #     #  # #    #  # #  #'
-echo '#  #  ###  #### # # #     #### #### #### ###'
-echo '#  #  #    #    #  ##     #  #    # #  # #  #'
-echo '####  #    #### #   #  #  #  # #### #  # #  #'
-echo
+hash n
 echo '1. Discord Stable (default)'
 echo '2. Discord PTB'
 echo '3. Discord Canary'
@@ -77,32 +85,38 @@ while [[ -z $kebab ]]; do
         elif [[ -e "$ans" ]]; then
             file="$ans"
         else
-            echo Please enter a number from 1 to 3 corresponding to a version above, or the path to app.asar.
+            echo Please enter a number from 1 to 3 corresponding to a version above or the path to app.asar.
             read -r ans
         fi
         ;;
     esac
 done
 
-ans=$((ans-1))
+# Generate list of possible paths to app.asar
+ans=$((ans-1)) # Arrays are 0-indexed
 camel=('discord' 'discordPtb' 'discordCanary')
 pascal=('Discord' 'DiscordPtb' 'DiscordCanary')
 plain=('Discord Stable' 'Discord PTB' 'Discord Canary')
 files=(
     "/opt/$kebab/resources/app.asar"
+    "/usr/share/$kebab/resources/app.asar"
     "/var/lib/flatpak/app/com.discordapp.${pascal[ans]}/current/active/files/${camel[ans]}/resources/app.asar"
     "$HOME/local/share/flatpak/app/com.discordapp.${pascal[ans]}/current/active/files/${camel[ans]}/resources/app.asar"
+    "/Applications/${plain[ans]}.app/Contents/Resources/app.asar"
+    "$HOME/Applications/${plain[ans]}.app/Contents/Resources/app.asar"
     "/usr/lib/$kebab/resources/app.asar"
     "/usr/lib64/$kebab/resources/app.asar"
-    "/usr/share/$kebab/resources/app.asar"
     "/usr/lib/$kebab/app.asar"
+    #'/usr/lib/discord-development/app.asar' # Old name for PTB
     'WtoI-7DWs4o')
+
 echo Looking for app.asar...
 for file in "${files[@]}"; do
     if [[ -e "$file" ]]; then
         break
     fi
 done
+
 if [[ "$file" == "WtoI-7DWs4o" ]]; then
     if [[ $ans == 1 && -e '/usr/lib/discord-development/app.asar' ]]; then
         file=/usr/lib/discord-development/app.asar
@@ -115,37 +129,15 @@ if [[ "$file" == "WtoI-7DWs4o" ]]; then
                 exit $?
             else
                 if [ $? -ne 0 ]; then exit $?; fi
-                sleep 1
-                clear
-                echo
-                echo 'Installer updated and maintained by aaronliu0130 (@aaronliu)'
-                echo
-                echo '====  ===  ==== =   =      ==  ====  ==  ==='
-                echo '=  =  =  = =    ==  =     =  = =    =  = =  ='
-                echo '=  =  ===  ==== = = =     ==== ==== ==== ==='
-                echo '=  =  =    =    =  ==     =  =    = =  = =  ='
-                echo '====  =    ==== =   =  =  =  = ==== =  = =  ='
-                echo
-                echo 'OpenAsar should be installed! You can check by looking for an "OpenAsar" option in your Discord settings.'
-                echo 'Not installed? Try restarting Discord, running this script again, filing a GitHub issue or contacting @aaronliu on Discord.'
+                eq
+                echo "$end"
                 if [[ $spaceballs == 6 ]]; then
-                echo
-                echo "If you can read this, you don't need glasses."
-                export spaceballs="If you can read this, you don't need glasses."
+                    export spaceballs="If you can read this, you don't need glasses."
+                    echo "
+                    $spaceballs"
                 fi
-                sleep 1
-                clear
-                echo
-                echo 'Installer updated and maintained by aaronliu0130 (@aaronliu)'
-                echo
-                echo '....  ...  .... .   .      ..  ....  ..  ...'
-                echo '.  .  .  . .    ..  .     .  . .    .  . .  .'
-                echo '.  .  ...  .... . . .     .... .... .... ...'
-                echo '.  .  .    .    .  ..     .  .    . .  . .  .'
-                echo '....  .    .... .   .  .  .  . .... .  . .  .'
-                echo
-                echo 'OpenAsar should be installed! You can check by looking for an "OpenAsar" option in your Discord settings.'
-                echo 'Not installed? Try restarting Discord, running this script again, filing a GitHub issue or contacting @aaronliu on Discord.'
+                dot
+                echo "$end"
                 exit 0
             fi
         fi
@@ -155,91 +147,59 @@ if [[ "$file" == "WtoI-7DWs4o" ]]; then
         fi
         if [[ ! -e "$file" ]]; then
             echo "$file doesn't exist. Exiting..."
-            exit 2
+            exit 66 # EX_NOINPUT
         fi
     fi
 fi
 echo "Found app.asar at $file. Press enter to continue and ^C (Ctrl+C) to quit."
 read -r
 
-echo
-paskill=('Discord' 'DiscordPTB' 'DiscordCanary')
-echo "Killing ${plain[$ans]} (if found)..."
+echo "
+Killing ${plain[$ans]} (if found)..."
+paskill=('Discord' 'DiscordPTB' 'DiscordCanary') # why, discord, whyyyy
 killall "${paskill[ans]}"
-until ! killall "${paskill[ans]}" -s 0; do
+until ! killall "${paskill[ans]}" -s 0; do # Send a 0 code to the program to check if it's running
     sleep 1
 done
 
-echo Installing...
-echo
-echo '1. Backing up original app.asar(s) to app.asar(s).backup...'
-if ! mv "$file" "$file.backup"; then
+sudo="" # Add sudo if needed
+echo 'Installing...
+
+1. Backing up original app.asar(s) to app.asar(s).backup...'
+if ! eval "$sudo mv" "$file" "$file.backup"; then
     echo Modification failed, please provide the sudo password to elevate and retry.
-    if ! sudo mv "$file" "$file.backup"; then
+    sudo="sudo"
+    if ! eval "$sudo mv" "$file" "$file.backup"; then
         echo Failed even with elevation. Please file an issue and report this. Exiting...
-        exit 77
+        exit 77 # EX_NOPERM
     fi
-    # See the other comment below.
-    if [[ -e "$(dirname "$file")/_app.asar" ]]; then
-        sudo mv "$(dirname "$file")/_app.asar" "$(dirname "$file")/_app.asar.backup"
-    fi
-    if [[ -e "$(dirname "$file")/app.orig.asar" ]]; then
-        sudo mv "$(dirname "$file")/app.orig.asar" "$(file).orig.backup"
-    fi
-else
-    # Popular client mods refer to these files as the original asar
-    if [[ -e "$(dirname "$file")/_app.asar" ]]; then
-        mv "$(dirname "$file")/_app.asar" "$(dirname "$file")/_app.asar.backup"
-    fi
-    if [[ -e "$(dirname "$file")/app.orig.asar" ]]; then
-        mv "$(dirname "$file")/app.orig.asar" "$(dirname "$file")/app.orig.asar.backup"
-    fi
+fi
+# Popular client mods refer to these files as the original asar
+if [[ -e "$(dirname "$file")/_app.asar" ]]; then
+    eval "$sudo mv" "$(dirname "$file")/_app.asar" "$(dirname "$file")/_app.asar.backup"
+fi
+if [[ -e "$(dirname "$file")/app.orig.asar" ]]; then
+    eval "$sudo mv" "$(dirname "$file")/app.orig.asar" "$(dirname "$file")/app.orig.asar.backup"
 fi
 
 echo '2. Downloading OpenAsar...'
 if ! curl -sLo "$file" 'https://github.com/GooseMod/OpenAsar/releases/download/latest/app.asar'; then
-    echo Downloading failed, retrying with sudo...
-    if ! sudo curl -sLo "$file" 'https://github.com/GooseMod/OpenAsar/releases/download/latest/app.asar'; then
-        echo Failed even with elevation. Please file an issue and report this. Exiting...
-        exit 77
-    fi
-    if [[ -e "$(dirname "$file")/_app.asar.backup" && "$(basename "$file")" != _app.asar ]]; then
-        sudo cp "$file" "$(dirname "$file")/_app.asar"
-        sudo mv -f "$file.backup" "$file"
-    fi
-    if [[ -e "$(dirname "$file")/app.orig.asar.backup" && "$(basename "$file")" != app.orig.asar ]]; then
-        if ! sudo cp "$file" "$(dirname "$file")/app.orig.asar" 2>/dev/null; then
-            # weird user has both replugged and BD installed smh so we hid errors
-            sudo cp "$(dirname "$file")/_app.asar" "$(dirname "$file")/app.orig.asar"
-        else
-            sudo mv -f "$file.backup" "$file"
-        fi
-    fi
-else
-    if [[ -e "$(dirname "$file")/_app.asar.backup" && "$(basename "$file")" != _app.asar ]]; then
-        cp "$file" "$(dirname "$file")/_app.asar"
-        mv -f "$file.backup" "$file"
-    fi
-    if [[ -e "$(dirname "$file")/app.orig.asar.backup" && "$(basename "$file")" != app.orig.asar ]]; then
-        if ! cp "$file" "$(dirname "$file")/app.orig.asar" 2>/dev/null; then
-            # weird user has both replugged and BD installed smh so we hid errors
-            cp "$(dirname "$file")/_app.asar" "$(dirname "$file")/app.orig.asar"
-        else
-            mv -f "$file.backup" "$file"
-        fi
+    echo Downloading failed. Please file an issue and report this. Exiting...
+    exit 69 # EX_UNAVAILABLE
+fi
+if [[ -e "$(dirname "$file")/_app.asar.backup" && "$(basename "$file")" != _app.asar ]]; then
+    eval "$sudo cp" "$file" "$(dirname "$file")/_app.asar"
+    eval "$sudo mv" -f "$file.backup" "$file"
+fi
+if [[ -e "$(dirname "$file")/app.orig.asar.backup" && "$(basename "$file")" != app.orig.asar ]]; then
+    if ! eval "$sudo cp" "$file" "$(dirname "$file")/app.orig.asar" 2>/dev/null; then
+        # weird user has both replugged and vencord installed smh so we hide errors
+        eval "$sudo cp" "$(dirname "$file")/_app.asar" "$(dirname "$file")/app.orig.asar"
+    else
+        eval "$sudo mv" -f "$file.backup" "$file"
     fi
 fi
+
 echo All clear!
-sleep 1
-clear
-echo
-echo 'Installer updated and maintained by aaronliu0130 (@aaronliu)'
-echo
-echo '####  ###  #### #   #      ##  ####  ##  ###'
-echo '#  #  #  # #    ##  #     #  # #    #  # #  #'
-echo '#  #  ###  #### # # #     #### #### #### ###'
-echo '#  #  #    #    #  ##     #  #    # #  # #  #'
-echo '####  #    #### #   #  #  #  # #### #  # #  #'
-echo
-echo 'OpenAsar should be installed! You can check by looking for an "OpenAsar" option in your Discord settings.'
-echo 'Not installed? Try restarting Discord, running this script again, filing a GitHub issue or contacting @aaronliu on Discord.'
+hash
+echo "$end"
