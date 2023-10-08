@@ -122,8 +122,10 @@ if exist "%localappdata%\%discordApp%\app-%latestVersion%\resources\app.asar.bac
 )
 rem Popular client mods use these files as the asar to read discord from
 if exist "%localappdata%\%discordApp%\app-%latestVersion%\resources\_app.asar" (
+    echo Detected Vencord installation, installing to _app.asar instead.
     move /y "%localappdata%\%discordApp%\app-%latestVersion%\resources\_app.asar" "%localappdata%\%discordApp%\app-%latestVersion%\resources\_app.asar.backup" >nul
 ) else ( if exist "%localappdata%\%discordApp%\app-%version%\resources\app.orig.asar" (
+    echo Detected Replugged installation, installing to app.orig.asar instead.
     move /y "%localappdata%\%discordApp%\app-%latestVersion%\resources\app.orig.asar" "%localappdata%\%discordApp%\app-%latestVersion%\resources\app.orig.asar.backup" >nul
 ) else (
     rem No mod known
