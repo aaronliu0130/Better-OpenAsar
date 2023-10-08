@@ -14,7 +14,7 @@ Installer updated and maintained by aaronliu0130 (@aaronliu)
 .  .  ...  .... . . .     .... .... .... ...
 .  .  .    .    .  ..     .  .    . .  . .  .
 ....  .    .... .   .  .  .  . .... .  . .  .
-'
+' >&2
 }
 eq () {
     if [[ -z "$1" ]]; then sleep 1; fi
@@ -28,7 +28,7 @@ Installer updated and maintained by aaronliu0130 (@aaronliu)
 =  =  =    =    =  ==     =  =    = =  = =  =
 ====  =    ==== =   =  =  =  = ==== =  = =  =
 '
-}
+} >&2
 hash () {
     if [[ -z "$1" ]]; then sleep 1; fi
     clear
@@ -41,7 +41,7 @@ Installer updated and maintained by aaronliu0130 (@aaronliu)
 #  #  #    #    #  ##     #  #    # #  # #  #
 ####  #    #    #   #  #  #  # #### #  # #  #
 '
-}
+} >&2
 end='OpenAsar should be installed! You can check by looking for an "OpenAsar" option in your Discord settings.
 Not installed? Try restarting Discord, running this script again, filing a GitHub issue or contacting @aaronliu on Discord.'
 
@@ -59,7 +59,7 @@ if [[ -z $spaceballs ]]; then
             if [ $? -ne 0 ]; then exit $?; fi
             export spaceballs="If you can read this, you don't need glasses."
             eq
-            echo "$end"
+            echo "$end" >&2
             exit 0
         fi
     fi
@@ -110,7 +110,7 @@ files=(
     #'/usr/lib/discord-development/app.asar' # Old name for PTB
     'WtoI-7DWs4o')
 
-echo Looking for app.asar...
+echo 'Looking for app.asar...' >&2
 for file in "${files[@]}"; do
     if [[ -e "$file" ]]; then
         break
@@ -130,14 +130,14 @@ if [[ "$file" == "WtoI-7DWs4o" ]]; then
             else
                 if [ $? -ne 0 ]; then exit $?; fi
                 eq
-                echo "$end"
+                echo "$end" >&2
                 if [[ $spaceballs == 6 ]]; then
                     export spaceballs="If you can read this, you don't need glasses."
                     echo "
-                    $spaceballs"
+                    $spaceballs" >&2
                 fi
                 dot
-                echo "$end"
+                echo "$end" >&2
                 exit 0
             fi
         fi
@@ -146,7 +146,7 @@ if [[ "$file" == "WtoI-7DWs4o" ]]; then
             read -r file
         fi
         if [[ ! -e "$file" ]]; then
-            echo "$file doesn't exist. Exiting..."
+            echo "$file doesn't exist. Exiting..." >&2
             exit 66 # EX_NOINPUT
         fi
     fi
@@ -155,7 +155,7 @@ echo "Found app.asar at $file. Press enter to continue and ^C (Ctrl+C) to quit."
 read -r
 
 echo "
-Killing ${plain[$ans]} (if found)..."
+Killing ${plain[$ans]} (if found)..." >&2
 paskill=('Discord' 'DiscordPTB' 'DiscordCanary') # why, discord, whyyyy
 killall "${paskill[ans]}"
 until ! killall "${paskill[ans]}" -s 0; do # Send a 0 code to the program to check if it's running
@@ -165,26 +165,28 @@ done
 sudo="" # Add sudo if needed
 echo 'Installing...
 
-1. Backing up original app.asar(s) to app.asar(s).backup...'
+1. Backing up original app.asar(s) to app.asar(s).backup...' >&2
 if ! eval "$sudo mv" "$file" "$file.backup"; then
     echo Modification failed, please provide the sudo password to elevate and retry.
     sudo="sudo"
     if ! eval "$sudo mv" "$file" "$file.backup"; then
-        echo Failed even with elevation. Please file an issue and report this. Exiting...
+        echo 'Failed even with elevation. Please file an issue and report this. Exiting...' >&2
         exit 77 # EX_NOPERM
     fi
 fi
 # Popular client mods refer to these files as the original asar
 if [[ -e "$(dirname "$file")/_app.asar" ]]; then
+    echo 'Detected Vencord installation, installing to _app.asar instead.' >&2
     eval "$sudo mv" "$(dirname "$file")/_app.asar" "$(dirname "$file")/_app.asar.backup"
 fi
 if [[ -e "$(dirname "$file")/app.orig.asar" ]]; then
+    echo 'Detected Replugged installation, installing to app.orig.asar instead.' >&2
     eval "$sudo mv" "$(dirname "$file")/app.orig.asar" "$(dirname "$file")/app.orig.asar.backup"
 fi
 
 echo '2. Downloading OpenAsar...'
 if ! curl -sLo "$file" 'https://github.com/GooseMod/OpenAsar/releases/download/latest/app.asar'; then
-    echo Downloading failed. Please file an issue and report this. Exiting...
+    echo 'Downloading failed. Please file an issue and report this. Exiting...' >&2
     exit 69 # EX_UNAVAILABLE
 fi
 if [[ -e "$(dirname "$file")/_app.asar.backup" && "$(basename "$file")" != _app.asar ]]; then
@@ -194,12 +196,13 @@ fi
 if [[ -e "$(dirname "$file")/app.orig.asar.backup" && "$(basename "$file")" != app.orig.asar ]]; then
     if ! eval "$sudo cp" "$file" "$(dirname "$file")/app.orig.asar" 2>/dev/null; then
         # weird user has both replugged and vencord installed smh so we hide errors
+        echo 'Detected both Vencord and Replugged. Why‽ Installing to both.' >&2
         eval "$sudo cp" "$(dirname "$file")/_app.asar" "$(dirname "$file")/app.orig.asar"
     else
         eval "$sudo mv" -f "$file.backup" "$file"
     fi
 fi
 
-echo All clear!
+echo 'All clear!' >&2
 hash
-echo "$end"
+echo "$end" >&2
