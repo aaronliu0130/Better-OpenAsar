@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# v1.1.1: Benign Bepluggings
+# v1.2: Charming Chmoddy
 cd "$(dirname "$0")"
 
 # Header strings
@@ -48,9 +48,9 @@ Not installed? Try restarting Discord, running this script again, filing a GitHu
 if [[ -z $spaceballs ]]; then
     # li'l nicer animation, can be skipped by exporting spaceballs
     dot n
-    eq
     # Update checker
-    if [[ $(curl -r 0-99 -sL 'https://github.com/aaronliu0130/Better-OpenAsar/raw/main/installer/openasar-install.bash' | sed '2!d') != "# v1.1.1: Benign Bepluggings" ]]; then
+    if [[ $(curl -r 0-99 -sL 'https://github.com/aaronliu0130/Better-OpenAsar/raw/main/installer/openasar-install.bash' | sed '2!d') != "# v1.2: Charming Chmoddy" ]]; then
+        eq
         echo 'Updating...'
         curl -Lo "./openasar-install.bash" 'https://github.com/aaronliu0130/Better-OpenAsar/raw/main/installer/openasar-install.bash'
         if ! ./openasar-install.bash; then
@@ -63,6 +63,7 @@ if [[ -z $spaceballs ]]; then
             exit 0
         fi
     fi
+    eq
     sleep 1
 fi
 hash n
@@ -176,27 +177,29 @@ if ! eval "$sudo mv" "$file" "$file.backup"; then
 fi
 # Popular client mods refer to these files as the original asar
 if [[ -e "$(dirname "$file")/_app.asar" ]]; then
-    echo 'Detected Vencord installation, installing to _app.asar instead.' >&2
+    echo "Detected Vencord installation; installing to $(dirname "$file")/_app.asar instead." >&2
     eval "$sudo mv" "$(dirname "$file")/_app.asar" "$(dirname "$file")/_app.asar.backup"
 fi
 if [[ -e "$(dirname "$file")/app.orig.asar" ]]; then
-    echo 'Detected Replugged installation, installing to app.orig.asar instead.' >&2
+    echo "Detected Replugged installation; installing to $(dirname "$file")/app.orig.asar instead." >&2
     eval "$sudo mv" "$(dirname "$file")/app.orig.asar" "$(dirname "$file")/app.orig.asar.backup"
 fi
 
 echo '2. Downloading OpenAsar...'
-if ! curl -sLo "$file" 'https://github.com/GooseMod/OpenAsar/releases/download/latest/app.asar'; then
+if ! eval "$sudo curl" -sLo "$file" 'https://github.com/GooseMod/OpenAsar/releases/download/latest/app.asar'; then
     echo 'Downloading failed. Please file an issue and report this. Exiting...' >&2
     exit 69 # EX_UNAVAILABLE
 fi
-if [[ -e "$(dirname "$file")/_app.asar.backup" && "$(basename "$file")" != _app.asar ]]; then
+echo 'Adding write perms to OpenAsar for auto-updating...' >&2
+eval "$sudo chmod" +w "$file"
+if [[ -e "$(dirname "$file")/_app.asar.backup" && "$(basename "$file")" != _app.asar ]]; then # Prevent smarty-users from breaking script by pointing to actual asar
     eval "$sudo cp" "$file" "$(dirname "$file")/_app.asar"
     eval "$sudo mv" -f "$file.backup" "$file"
 fi
 if [[ -e "$(dirname "$file")/app.orig.asar.backup" && "$(basename "$file")" != app.orig.asar ]]; then
     if ! eval "$sudo cp" "$file" "$(dirname "$file")/app.orig.asar" 2>/dev/null; then
-        # weird user has both replugged and vencord installed smh so we hide errors
-        echo 'Detected both Vencord and Replugged. Why‽ Installing to both.' >&2
+        # Weird user has both replugged and vencord installed smh so we hide errors
+        echo "Detected both Vencord and Replugged. Why‽ I'm not putting up with this soot. Installing to both." >&2
         eval "$sudo cp" "$(dirname "$file")/_app.asar" "$(dirname "$file")/app.orig.asar"
     else
         eval "$sudo mv" -f "$file.backup" "$file"
