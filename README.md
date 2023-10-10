@@ -2,9 +2,13 @@
 
 This has a Linux install script and GreenMan36's improved version of the Windows install script.
 
-## 🐧 Linux
+## 🐧 Linux & 🍎 macOS
 
-On Linux, no updates have changed the path of Discord's files yet. However, there are a ton of paths that could have them, as Discord does not have official packages for every distro (variety) of Linux, and even the official packages might get installed to different places by package managers.
+On Linux and macOS, no updates have changed the path of Discord's files yet. However, there are a ton of paths that could have them, as Discord does not have official packages for every distro (variety) of Linux, and even the official packages might get installed to different places by package managers.
+
+Macs fortunately support bash/zsh and should only be in one of two locations.
+
+You can run the script with any shell that supports bash's [[ conditionals, including zsh. 
 
 ### 🎥 Demo
 
