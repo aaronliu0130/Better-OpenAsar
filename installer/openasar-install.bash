@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# v1.2: Charming Chmoddy
+# v1.2.1: Charming Chmoddy
 cd "$(dirname "$0")"
 
 # Header strings
@@ -97,7 +97,7 @@ done
 ans=$((ans-1)) # Arrays are 0-indexed
 camel=('discord' 'discordPtb' 'discordCanary')
 pascal=('Discord' 'DiscordPtb' 'DiscordCanary')
-plain=('Discord Stable' 'Discord PTB' 'Discord Canary')
+plain=('Discord' 'Discord PTB' 'Discord Canary')
 files=(
     "/opt/$kebab/resources/app.asar"
     "/usr/share/$kebab/resources/app.asar"
