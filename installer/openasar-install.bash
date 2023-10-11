@@ -52,7 +52,7 @@ if [[ -z $spaceballs ]]; then
     if [[ $(curl -r 0-99 -sL 'https://github.com/aaronliu0130/Better-OpenAsar/raw/main/installer/openasar-install.bash' | sed '2!d') != "# v1.2.2: Charming Chmoddy" ]]; then
         eq
         echo 'Updating...'
-        curl --fail -Lo "./openasar-install.bash" 'https://github.com/aaronliu0130/Better-OpenAsar/raw/main/installer/openasar-install.bash'
+        curl --fail -LO 'https://github.com/aaronliu0130/Better-OpenAsar/raw/main/installer/openasar-install.bash'
         if ! ./openasar-install.bash; then
             exit $?
         else
