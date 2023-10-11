@@ -49,7 +49,7 @@ if [[ -z $spaceballs ]]; then
     # li'l nicer animation, can be skipped by exporting spaceballs
     dot n
     # Update checker
-    if [[ $(curl -r 0-99 -sL 'https://github.com/aaronliu0130/Better-OpenAsar/raw/main/installer/openasar-install.bash' | sed '2!d') != "# v1.2: Charming Chmoddy" ]]; then
+    if [[ $(curl -r 0-99 -sL 'https://github.com/aaronliu0130/Better-OpenAsar/raw/main/installer/openasar-install.bash' | sed '2!d') != "# v1.2.1: Charming Chmoddy" ]]; then
         eq
         echo 'Updating...'
         curl -Lo "./openasar-install.bash" 'https://github.com/aaronliu0130/Better-OpenAsar/raw/main/installer/openasar-install.bash'
