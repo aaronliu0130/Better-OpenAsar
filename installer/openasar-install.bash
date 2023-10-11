@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# v1.2.1: Charming Chmoddy
+# v1.2.2: Charming Chmoddy
 cd "$(dirname "$0")"
 
 # Header strings
@@ -49,10 +49,10 @@ if [[ -z $spaceballs ]]; then
     # li'l nicer animation, can be skipped by exporting spaceballs
     dot n
     # Update checker
-    if [[ $(curl -r 0-99 -sL 'https://github.com/aaronliu0130/Better-OpenAsar/raw/main/installer/openasar-install.bash' | sed '2!d') != "# v1.2.1: Charming Chmoddy" ]]; then
+    if [[ $(curl -r 0-99 -sL 'https://github.com/aaronliu0130/Better-OpenAsar/raw/main/installer/openasar-install.bash' | sed '2!d') != "# v1.2.2: Charming Chmoddy" ]]; then
         eq
         echo 'Updating...'
-        curl -Lo "./openasar-install.bash" 'https://github.com/aaronliu0130/Better-OpenAsar/raw/main/installer/openasar-install.bash'
+        curl --fail -Lo "./openasar-install.bash" 'https://github.com/aaronliu0130/Better-OpenAsar/raw/main/installer/openasar-install.bash'
         if ! ./openasar-install.bash; then
             exit $?
         else
@@ -186,7 +186,7 @@ if [[ -e "$(dirname "$file")/app.orig.asar" ]]; then
 fi
 
 echo '2. Downloading OpenAsar...'
-if ! eval "$sudo curl" -sLo "$file" 'https://github.com/GooseMod/OpenAsar/releases/download/latest/app.asar'; then
+if ! eval "$sudo curl" --fail -sLo "$file" 'https://github.com/GooseMod/OpenAsar/releases/latest/download/app.asar'; then
     echo 'Downloading failed. Please file an issue and report this. Exiting...' >&2
     exit 69 # EX_UNAVAILABLE
 fi
