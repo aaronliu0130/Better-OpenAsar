@@ -29,6 +29,7 @@ You can run the script with any shell that supports bash's [[ conditionals, incl
 * Automatically try to sudo if installation fails
 * Intuitive input hints
 * Allow specifying a custom path
+* Unsupressed system commands' error messages, allowing you to nicely debug stuff
 
 ## 🐌 Windows
 
@@ -51,7 +52,7 @@ GreenMan36's improved version automatically detects the folder for the newest ve
 * Installs no matter Discord's version
 * Intuitive error messages
 * Nice li'l animation
-If there's any issues, the installer will give you a nice error message which an be used to quickly debug where things went wrong.
+* If there's any issues, the installer will give you a nice error message which an be used to quickly debug where things went wrong.
 
 ## 🤓 Misc
 
