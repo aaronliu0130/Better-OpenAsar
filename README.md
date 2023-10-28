@@ -38,7 +38,7 @@ GreenMan36's improved version automatically detects the folder for the newest ve
 
 ### 🎥 Demo
 
-[![asciicast](https://asciinema.org/a/Hr6o4z5O2AMEZKnTTPQenpOot.svg)](https://asciinema.org/a/594421?autoplay=1)
+[![asciicast](https://github.com/aaronliu0130/Better-OpenAsar-Installer/assets/11874211/851ed802-fe36-4f5f-96b4-0548f9abe238)](https://asciinema.org/a/594421?autoplay=1)
 
 #### 😩 TL;DR:
 
