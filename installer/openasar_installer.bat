@@ -127,10 +127,13 @@ if exist "%localappdata%\%discordApp%\app-%latestVersion%\resources\_app.asar" (
 ) else ( if exist "%localappdata%\%discordApp%\app-%version%\resources\app.orig.asar" (
     echo Detected Replugged installation, installing to app.orig.asar instead.
     move /y "%localappdata%\%discordApp%\app-%latestVersion%\resources\app.orig.asar" "%localappdata%\%discordApp%\app-%latestVersion%\resources\app.orig.asar.backup" >nul
+) else ( if exist "%localappdata%\%discordApp%\app-%version%\resources\original.asar" (
+    echo Detected Shelter installation, installing to original.asar instead.
+    move /y "%localappdata%\%discordApp%\app-%latestVersion%\resources\original.asar" "%localappdata%\%discordApp%\app-%latestVersion%\resources\original.asar.backup" >nul
 ) else (
     rem No mod known
     move /y "%localappdata%\%discordApp%\app-%latestVersion%\resources\app.asar" "%localappdata%\%discordApp%\app-%latestVersion%\resources\app.asar.backup" >nul
-))
+)))
 if errorlevel 1 (
     color f6
     echo.
@@ -145,10 +148,12 @@ if exist "%localappdata%\%discordApp%\app-%version%\resources\_app.asar.backup" 
     powershell -Command "Invoke-WebRequest https://github.com/GooseMod/OpenAsar/releases/download/nightly/app.asar -OutFile "%localappdata%\%discordApp%\app-%version%\resources\_app.asar"" >nul
 ) else ( if exist "%localappdata%\%discordApp%\app-%version%\resources\app.orig.asar.backup" (
     powershell -Command "Invoke-WebRequest https://github.com/GooseMod/OpenAsar/releases/download/nightly/app.asar -OutFile "%localappdata%\%discordApp%\app-%version%\resources\app.orig.asar"" >nul
+) else ( if exist "%localappdata%\%discordApp%\app-%version%\resources\original.asar.backup" (
+    powershell -Command "Invoke-WebRequest https://github.com/GooseMod/OpenAsar/releases/download/nightly/app.asar -OutFile "%localappdata%\%discordApp%\app-%version%\resources\original.asar"" >nul
 ) else (
     rem No mod known
     powershell -Command "Invoke-WebRequest https://github.com/GooseMod/OpenAsar/releases/download/nightly/app.asar -OutFile "%localappdata%\%discordApp%\app-%version%\resources\app.asar"" >nul
-))
+)))
 
 rem If the download command failed, exit
 if errorlevel 1 (
